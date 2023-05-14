@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "363225398240",
+    "project_id": "prans-infotech-32b1c",
+    "storage_bucket": "prans-infotech-32b1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363225398240:android:ddba108084626ee30f4985",
+        "android_client_info": {
+          "package_name": "com.example.opinion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363225398240-p5ce7q5j6uep98t70ru6sqiq04bef652.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN5zVB-Yr2q77ORpT2LwxUQFvEhZ1pAqc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363225398240-p5ce7q5j6uep98t70ru6sqiq04bef652.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "363225398240-7n6i2jk7d0gm8cre0dhm4mf4uamoeg6o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.opinion"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

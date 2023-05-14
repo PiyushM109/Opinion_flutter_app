@@ -1,66 +1,59 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:opinion/components/button.dart';
 import 'package:opinion/components/text_field.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final Function()? onTap;
-  const LoginPage({
+  const RegisterPage({
     super.key,
     required this.onTap,
   });
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
+  final confirmpasswordTextController = TextEditingController();
+  final nameTextController = TextEditingController();
+  final surnameTextController = TextEditingController();
 
-  void signIn() async {
+  void signUp() async {
     showDialog(
       context: context,
       builder: (context) => const Center(
         child: CircularProgressIndicator(),
       ),
     );
+
+    if (passwordTextController.text != confirmpasswordTextController.text) {
+      Navigator.pop(context);
+      displayMessage("Password don't Match");
+      return;
+    }
+
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailTextController.text,
         password: passwordTextController.text,
       );
 
       if(context.mounted) Navigator.pop(context);
-    } on FirebaseAuthException catch (error) {
+    } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
-      displayMessage(error.code);
+      displayMessage(e.code);
+
     }
   }
 
-  void displayMessage(dynamic message) {
-    String errorMessage = "Unknown error occurred";
-    if (message is FirebaseAuthException) {
-      switch (message.code) {
-        case "user-not-found":
-          errorMessage = "User not found";
-          break;
-        case "wrong-password":
-          errorMessage = "Wrong password";
-          break;
-        case "invalid-email":
-          errorMessage = "Invalid email";
-          break;
-        default:
-          errorMessage = "Unknown error occurred";
-          break;
-      }
-    }
+  void displayMessage(String message) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(errorMessage),
+        title: Text(message),
       ),
     );
   }
@@ -78,8 +71,11 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 Image.asset(
                   'images/PRANS.png',
-                  height: 150,
+                  height: 100,
                   // width: 100,
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 Text(
                   "Welcome to PRANS Infotech.",
@@ -102,6 +98,30 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 25,
                 ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: MyTextField(
+                        controller: nameTextController,
+                        hintText: "First Name",
+                        obscuretext: false,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: MyTextField(
+                        controller: surnameTextController,
+                        hintText: "Last Name",
+                        obscuretext: false,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 MyTextField(
                   controller: emailTextController,
                   hintText: "Email",
@@ -116,11 +136,19 @@ class _LoginPageState extends State<LoginPage> {
                   obscuretext: true,
                 ),
                 const SizedBox(
+                  height: 10,
+                ),
+                MyTextField(
+                  controller: confirmpasswordTextController,
+                  hintText: "Confirm Password",
+                  obscuretext: true,
+                ),
+                const SizedBox(
                   height: 15,
                 ),
                 MyButton(
-                  onTap: signIn,
-                  text: "Sign In",
+                  onTap: signUp,
+                  text: "Sign Up",
                 ),
                 const SizedBox(
                   height: 10,
@@ -128,11 +156,11 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Not a member? "),
+                    Text("Already have an account? "),
                     GestureDetector(
                       onTap: widget.onTap,
-                      child: const Text(
-                        "Register now",
+                      child: Text(
+                        "Sign In now",
                         style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
