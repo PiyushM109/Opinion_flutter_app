@@ -22,6 +22,8 @@ class _HomePageState extends State<HomePage> {
         'UserEmail': curentUser?.email,
         'Message': textcontroller.text,
         'Timestamp': DateTime.now(),
+        'Likes' : [],
+
       });
     }
 
@@ -41,12 +43,13 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Suggestion Page",
+          "The Board",
           style: TextStyle(
+
             color: Colors.grey[300],
           ),
         ),
-        backgroundColor: Colors.grey[700],
+        backgroundColor: Colors.grey[800],
         actions: [
           IconButton(
             onPressed: signOut,
@@ -75,6 +78,8 @@ class _HomePageState extends State<HomePage> {
                         return WallPost(
                           message: post['Message'],
                           user: post['UserEmail'],
+                          postId: post.id,
+                          likes: List<String>.from(post['Likes'] ?? []),
                         );
                       },
                     );
@@ -98,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                     child: MyTextField(
                       controller: textcontroller,
-                      hintText: "is there any Suggestion?",
+                      hintText: "write something",
                       obscuretext: false,
                     ),
                   ),
