@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:opinion/components/drawer.dart';
 import 'package:opinion/components/text_field.dart';
 import 'package:opinion/components/wall_post.dart';
+import 'package:opinion/pages/profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,8 +24,7 @@ class _HomePageState extends State<HomePage> {
         'UserEmail': curentUser?.email,
         'Message': textcontroller.text,
         'Timestamp': DateTime.now(),
-        'Likes' : [],
-
+        'Likes': [],
       });
     }
 
@@ -36,6 +37,17 @@ class _HomePageState extends State<HomePage> {
     FirebaseAuth.instance.signOut();
   }
 
+  void goToProfilePage() {
+    Navigator.pop(context);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProfilePage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,19 +55,17 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "The Board",
+          "T H E   B O A R D",
           style: TextStyle(
-
             color: Colors.grey[300],
           ),
         ),
         backgroundColor: Colors.grey[800],
-        actions: [
-          IconButton(
-            onPressed: signOut,
-            icon: Icon(Icons.logout),
-          ),
-        ],
+        
+      ),
+      drawer: MyDrawer(
+        onProfileTap: goToProfilePage,
+        onSignOut: signOut,
       ),
       body: Center(
         child: Column(

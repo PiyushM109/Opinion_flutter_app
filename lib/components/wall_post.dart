@@ -58,8 +58,8 @@ class _WallPostState extends State<WallPost> {
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(8),
       ),
-      margin: EdgeInsets.only(top: 15, right: 15, left: 15),
-      padding: EdgeInsets.all(15),
+      margin: const EdgeInsets.only(top: 15, right: 15, left: 15),
+      padding: const EdgeInsets.all(15),
       child: Row(
         children: [
           //profile pic
@@ -80,7 +80,7 @@ class _WallPostState extends State<WallPost> {
                     ),
                   ),
                   const SizedBox(
-                    width: 4,
+                    width:4,
                   ),
                   Text(
                     widget.user,
@@ -89,10 +89,11 @@ class _WallPostState extends State<WallPost> {
                       fontSize: 10,
                     ),
                   ),
+                  
                 ],
               ),
               const SizedBox(
-                height: 15,
+                height: 5,
               ),
               Row(
                 children: [
@@ -112,17 +113,18 @@ class _WallPostState extends State<WallPost> {
                     ],
                   ),
                   const SizedBox(
-                    width: 10,
+                    width: 15,
                   ),
                   Text(
                     widget.message,
                     style: TextStyle(
-                      color: Colors.grey[800],
+                      color: Colors.grey[900],
                     ),
                   ),
+                  
+                  
                 ],
               ),
-              
             ],
           ),
         ],
