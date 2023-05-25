@@ -101,7 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     padding: const EdgeInsets.only(left: 25.0),
                     child: Text(
                       'My Details',
-                      style: TextStyle(color: Colors.grey[700]),
+                      style: TextStyle(color: Colors.grey[750]),
                     ),
                   ),
                   MyTextBox(
