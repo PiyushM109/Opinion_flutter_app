@@ -4,6 +4,8 @@ import 'package:opinion/auth/auth.dart';
 import 'package:opinion/auth/login_or_register.dart';
 import 'package:opinion/pages/login_page.dart';
 import 'package:opinion/pages/register_page.dart';
+import 'package:opinion/themes/dark_theme.dart';
+import 'package:opinion/themes/light_theme.dart';
 
 import 'firebase_options.dart';
 
@@ -21,8 +23,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const  MaterialApp(
+    return   MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
       home: AuthPage(),
     );
   }

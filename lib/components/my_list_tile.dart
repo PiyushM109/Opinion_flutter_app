@@ -19,13 +19,13 @@ class MyListTile extends StatelessWidget {
       child: ListTile(
         leading: Icon(
           icon,
-          color: Colors.white,
+          // color: Colors.white,
         ),
         onTap: onTap,
         title: Text(
           text,
           style: const TextStyle(
-            color: Colors.white,
+            // color: Colors.white,
             fontSize: 20,
           ),
         ),

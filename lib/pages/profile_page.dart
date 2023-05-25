@@ -26,7 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
           autofocus: true,
           decoration: InputDecoration(
             hintText: "Enter new $field",
-            hintStyle: TextStyle(color: Colors.grey),
+            hintStyle: const TextStyle(color: Colors.grey),
           ),
           onChanged: (value) {
             newValue = value;
@@ -35,11 +35,11 @@ class _ProfilePageState extends State<ProfilePage> {
         actions: [
           TextButton(
             onPressed:() => Navigator.of(context).pop(newValue),
-            child: Text('Save'),
+            child: const Text('Save'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
         ],
       ),
@@ -55,16 +55,14 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           centerTitle: true,
-          title: Text(
+          title: const Text(
             "T H E   B O A R D",
             style: TextStyle(
-              color: Colors.grey[300],
             ),
           ),
-          backgroundColor: Colors.grey[800],
         ),
         body: StreamBuilder<DocumentSnapshot>(
           stream: FirebaseFirestore.instance
@@ -74,7 +72,6 @@ class _ProfilePageState extends State<ProfilePage> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final userData = snapshot.data!.data() as Map<String, dynamic>;
-
               return ListView(
                 children: [
                   const SizedBox(
@@ -91,7 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     currentUser.email!,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.grey[800],
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   const SizedBox(

@@ -105,7 +105,7 @@ class _WallPostState extends State<WallPost> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey[200],
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.circular(8),
       ),
       margin: const EdgeInsets.only(top: 15, right: 15, left: 15),
@@ -121,11 +121,11 @@ class _WallPostState extends State<WallPost> {
                   Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.grey[400],
+                      // color: Colors.grey[400],
                     ),
                     child: const Icon(
                       Icons.person,
-                      color: Colors.white,
+                      // color: Colors.white,
                     ),
                   ),
                   const SizedBox(
@@ -134,7 +134,7 @@ class _WallPostState extends State<WallPost> {
                   Text(
                     widget.user,
                     style: TextStyle(
-                      color: Colors.grey[600],
+                      // color: Colors.grey[600],
                       fontSize: 10,
                     ),
                   ),
@@ -150,9 +150,7 @@ class _WallPostState extends State<WallPost> {
                   ),
                   Text(
                     widget.message,
-                    style: TextStyle(
-                      color: Colors.grey[900],
-                    ),
+                   
                   ),
                 ],
               ),
@@ -174,7 +172,7 @@ class _WallPostState extends State<WallPost> {
                         widget.likes.length.toString(),
                         style: const TextStyle(
                           fontSize: 12,
-                          color: Colors.grey,
+                          // color: Colors.grey,
                         ),
                       ),
                     ],
@@ -189,7 +187,7 @@ class _WallPostState extends State<WallPost> {
                         '0',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.grey,
+                          // color: Colors.grey,
                         ),
                       ),
                     ],
