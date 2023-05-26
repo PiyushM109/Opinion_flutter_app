@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:opinion/components/comment.dart';
 import 'package:opinion/components/comment_button.dart';
+import 'package:opinion/components/delete_button.dart';
 import 'package:opinion/helper/helper_methods.dart';
 
 import 'like_button.dart';
@@ -29,7 +29,6 @@ class WallPost extends StatefulWidget {
 class _WallPostState extends State<WallPost> {
   final currentUser = FirebaseAuth.instance.currentUser!;
   bool isLiked = false;
-
   final _commentTextController = TextEditingController();
 
   @override
@@ -101,6 +100,52 @@ class _WallPostState extends State<WallPost> {
     );
   }
 
+  void deletePost() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Delete Post"),
+        content:
+            const Text("Are you sure you really want to delete this post?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () async {
+              final commentDocs = await FirebaseFirestore.instance
+                  .collection("User Posts")
+                  .doc(widget.postId)
+                  .collection("Comments")
+                  .get();
+
+              for (var doc in commentDocs.docs) {
+                await FirebaseFirestore.instance
+                    .collection("User Posts")
+                    .doc(widget.postId)
+                    .collection("comments")
+                    .doc(doc.id)
+                    .delete();
+              }
+
+              FirebaseFirestore.instance
+                  .collection("User Posts")
+                  .doc(widget.postId)
+                  .delete()
+                  .then((value) => print("Post Deleted"))
+                  .catchError(
+                      (error) => print("Failed to delete the post $error"));
+
+              Navigator.pop(context);
+            },
+            child: const Text("Delete"),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -110,57 +155,56 @@ class _WallPostState extends State<WallPost> {
       ),
       margin: const EdgeInsets.only(top: 15, right: 15, left: 15),
       padding: const EdgeInsets.all(15),
-      child: Row(
+      child: Column(
         children: [
           //profile pic
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      // color: Colors.grey[400],
-                    ),
-                    child: const Icon(
-                      Icons.person,
-                      // color: Colors.white,
-                    ),
+                  Row(
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.person,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                        widget.user,
+                        style: const TextStyle(
+                          fontSize: 10,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    widget.user,
-                    style: TextStyle(
-                      // color: Colors.grey[600],
-                      fontSize: 10,
-                    ),
-                  ),
+                  if (widget.user == currentUser.email)
+                    DeleteButton(onTap: deletePost),
                 ],
               ),
               const SizedBox(
                 height: 5,
               ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    widget.message,
-                   
-                  ),
-                ],
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Text(
+                  widget.message,
+                ),
               ),
               const SizedBox(
-                width: 10,
+                height: 10,
               ),
               Row(
                 children: [
                   const SizedBox(
-                    width: 200,
+                    width: 170,
                   ),
                   Column(
                     children: [
@@ -172,7 +216,6 @@ class _WallPostState extends State<WallPost> {
                         widget.likes.length.toString(),
                         style: const TextStyle(
                           fontSize: 12,
-                          // color: Colors.grey,
                         ),
                       ),
                     ],
@@ -187,7 +230,6 @@ class _WallPostState extends State<WallPost> {
                         '0',
                         style: TextStyle(
                           fontSize: 12,
-                          // color: Colors.grey,
                         ),
                       ),
                     ],
@@ -210,15 +252,13 @@ class _WallPostState extends State<WallPost> {
                       child: CircularProgressIndicator(),
                     );
                   }
-
                   return Container(
-                    width: 300,
+                    width: MediaQuery.of(context).size.width,
                     child: ListView(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       children: snapshot.data!.docs.map((doc) {
                         final commentData = doc.data() as Map<String, dynamic>;
-                  
                         return Comment(
                           text: commentData["CommentText"],
                           time: commentData["CommentBy"],

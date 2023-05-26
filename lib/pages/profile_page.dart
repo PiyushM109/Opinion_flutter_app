@@ -94,11 +94,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(
                     height: 30,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 25.0),
+                  const Padding(
+                    padding:  EdgeInsets.only(left: 25.0),
                     child: Text(
                       'My Details',
-                      style: TextStyle(color: Colors.grey[750]),
                     ),
                   ),
                   MyTextBox(

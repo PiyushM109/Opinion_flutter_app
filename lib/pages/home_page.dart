@@ -16,9 +16,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final curentUser = FirebaseAuth.instance.currentUser;
 
+  final textcontroller = TextEditingController();
   
 
-  final textcontroller = TextEditingController();
 
   void postMessage() {
     if (textcontroller.text.isNotEmpty) {
@@ -49,6 +49,8 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +60,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         title: Text(
           "T H E   B O A R D",
-          
         ),
-
-        
       ),
       drawer: MyDrawer(
         onProfileTap: goToProfilePage,
