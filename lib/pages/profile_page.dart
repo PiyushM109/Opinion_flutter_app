@@ -47,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
 
     //updating in fireStore
-    if(newValue.trim().length > 0){
+    if(newValue.trim().isNotEmpty){
       await userCollection.doc(currentUser.email).update({field: newValue});
     }
   }

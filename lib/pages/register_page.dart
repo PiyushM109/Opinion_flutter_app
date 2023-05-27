@@ -67,7 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -80,13 +80,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 100,
                   // width: 100,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text(
+                const Text(
                   "Welcome to PRANS Infotech.",
                   style: TextStyle(
-                    color: Colors.grey[700],
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -94,39 +93,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                Text(
+                const Text(
                   "This is the right place to pen down your thoughts",
                   style: TextStyle(
-                    color: Colors.grey[700],
                     fontSize: 16,
                   ),
                 ),
                 const SizedBox(
                   height: 25,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: MyTextField(
-                        controller: nameTextController,
-                        hintText: "First Name",
-                        obscuretext: false,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                      child: MyTextField(
-                        controller: surnameTextController,
-                        hintText: "Last Name",
-                        obscuretext: false,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
                 ),
                 MyTextField(
                   controller: emailTextController,
@@ -162,10 +136,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Already have an account? "),
+                    const Text("Already have an account? "),
                     GestureDetector(
                       onTap: widget.onTap,
-                      child: Text(
+                      child: const Text(
                         "Sign In now",
                         style: TextStyle(
                           color: Colors.blue,

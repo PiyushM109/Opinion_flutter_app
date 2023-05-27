@@ -18,8 +18,8 @@ class Comment extends StatelessWidget {
         color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(4),
       ),
-      margin: EdgeInsets.only(bottom: 7),
-      padding: EdgeInsets.only(bottom: 10,left:5, right: 10,top: 2),
+      margin: const EdgeInsets.only(bottom: 7),
+      padding: const EdgeInsets.only(bottom: 10,left:5, right: 10,top: 2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -49,11 +49,14 @@ class Comment extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(
+            height: 5,
+          ),
           Padding(
-            padding: const EdgeInsets.only(left:8.0),
+            padding: const EdgeInsets.only(left:4.0),
             child: Text(
               text,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
               ),
             ),

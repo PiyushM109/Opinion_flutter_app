@@ -27,7 +27,6 @@ class MyTextBox extends StatelessWidget {
             children: [
               Text(
                 sectionName,
-                
               ),
               IconButton(
                 onPressed: onPressed,

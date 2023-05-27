@@ -9,7 +9,7 @@ ThemeData darkTheme = ThemeData(
   colorScheme: ColorScheme.dark(
     background: Colors.black,
     primary: Colors.grey[900]!,
-    secondary: Colors.grey[700]!,
+    secondary: Colors.grey[800]!,
   ),
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(foregroundColor: Colors.white),
